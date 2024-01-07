@@ -19,9 +19,9 @@ public:
     void unlock();
 
 private:
-    bool held;                        // true if the lock is held, false otherwise
-    std::queue<TCB *> entrance_queue; // queue of threads waiting to acquire the lock
-    std::queue<TCB *> signaled_queue; // queue of threads that signaled and are waiting to reacquire the lock
+    bool held;                        // True if the lock is held, false otherwise
+    std::queue<TCB *> entrance_queue; // Queue of threads waiting to acquire the lock
+    std::queue<TCB *> signaled_queue; // Queue of threads that signaled and are waiting to reacquire the lock
 
     // Unlock the lock while interrupts have already been disabled
     // NOTE: Assumes interrupts are disabled
