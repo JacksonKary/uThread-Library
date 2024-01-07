@@ -10,7 +10,7 @@
 #define SYS_ERROR "system error: "
 
 /**
- * Jackson - Possibly just add these switch cases to the function in uthread.cpp
+ * Possibly just add these switch cases to the function in uthread.cpp
  */
 void aio_printError(int type, std::string pre)
 {
@@ -41,7 +41,7 @@ void aio_printError(int type, std::string pre)
         std::cerr << pre << "One or more of aio_offset, aio_reqprio, aio_nbytes are invalid" << std::endl;
         break;
     }
-    case ENOSYS: // this case should never really occur
+    case ENOSYS: // This case should never really occur
     {
         std::cerr << SYS_ERROR << "One of aio_return, aio_read, aio_write is not implemented" << std::endl;
         break;
@@ -83,11 +83,10 @@ ssize_t async_read(int fd, void *buf, size_t count, int offset)
     int aio_err;
     while ((aio_err = aio_error(&async_read_req)) == EINPROGRESS) {
         // Avoid busy-waiting
-        // possibly usleep(x usecs)
         uthread_yield();
     }
 
-    // check aio_err for errors
+    // Check aio_err for errors
     if (aio_err == ECANCELED) {
         aio_printError(ECANCELED, SYS_ERROR);
         return FAIL;
@@ -117,7 +116,6 @@ ssize_t async_read(int fd, void *buf, size_t count, int offset)
 // - Number of bytes written on success, -1 on failure
 ssize_t async_write(int fd, void *buf, size_t count, int offset)
 {
-    /* Consider how this should be used */
     struct aiocb async_write_req = {
         .aio_fildes = fd,
         .aio_buf = buf,
@@ -133,11 +131,10 @@ ssize_t async_write(int fd, void *buf, size_t count, int offset)
     int aio_err;
     while ((aio_err = aio_error(&async_write_req)) == EINPROGRESS) {
         // Avoid busy-waiting
-        // possibly usleep(x usecs)
         uthread_yield();
     }
 
-    // check aio_err for errors
+    // Check aio_err for errors
     if (aio_err == ECANCELED) {
         aio_printError(ECANCELED, SYS_ERROR);
         return FAIL;
