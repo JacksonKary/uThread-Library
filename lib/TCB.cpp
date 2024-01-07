@@ -1,27 +1,23 @@
-/*
- *
- */
-
 #include "TCB.h"
 #include <cassert>
 
 TCB::TCB(int tid, Priority pr, void *(*start_routine)(void *arg), void *arg, State state) : _tid(tid), _pr(pr), _quantum(0), _state(state), _lock_count(0)
 {
-       //init
+    // init
     _tid = tid;
     _pr = pr;
     _quantum = 0;
     _state = state;
     _stack = new char[STACK_SIZE];
 
-    //Get the current context
+    // Get the current context
     getcontext(&_context); 
-    //Modify stack
+    // Modify stack
     _context.uc_stack.ss_sp = _stack;
     _context.uc_stack.ss_size = STACK_SIZE;
     _context.uc_stack.ss_flags = 0;
 
-    //Set up to run with stub
+    // Set up to run with stub
     makecontext(&_context, (void(*)())stub, 2, start_routine, arg);
 }
 
@@ -37,23 +33,22 @@ void TCB::setState(State state)
 
 State TCB::getState() const
 {
-    return _state; // return statement added only to allow compilation (replace with correct code)
+    return _state;
 }
 
 int TCB::getId() const
 {
-    return _tid; // return statement added only to allow compilation (replace with correct code)
+    return _tid;
 }
 
 Priority TCB::getPriority() const
 {
-
-    return _pr;  // return statement added only to allow compilation (replace with correct code)
+    return _pr;
 }
 
 void TCB::increaseQuantum()
 {
-    _quantum ++;
+    _quantum++;
 }
 
 int TCB::getQuantum() const
@@ -78,7 +73,7 @@ int TCB::getLockCount()
 
 void TCB::increasePriority()
 {
-    
+    // TODO
 }
 
 void TCB::decreasePriority()
