@@ -1,6 +1,3 @@
-/*
- *
- */
 #ifndef TCB_H
 #define TCB_H
 // Define _XOPEN_SOURCE for MacOS
@@ -42,47 +39,47 @@ public:
     TCB(int tid, Priority pr, void *(*start_routine)(void *arg), void *arg, State state);
 
     /**
-     * thread d-tor
+     * thread deconstructor
      */
     ~TCB();
 
     /**
-     * function to set the thread state
+     * Function to set the thread state
      * @param state the new state for our thread
      */
     void setState(State state);
 
     /**
-     * function that get the state of the thread
+     * Function that get the state of the thread
      * @return the current state of the thread
      */
     State getState() const;
 
     /**
-     * function that get the ID of the thread
+     * Function that get the ID of the thread
      * @return the ID of the thread
      */
     int getId() const;
 
     /**
-     * function that get the priority of the thread
+     * Function that get the priority of the thread
      * @return the priority of the thread
      */
     Priority getPriority() const;
 
     /**
-     * function to increase the quantum of the thread
+     * Function to increase the quantum of the thread
      */
     void increaseQuantum();
 
     /**
-     * function that get the quantum of the thread
+     * Function that get the quantum of the thread
      * @return the current quantum of the thread
      */
     int getQuantum() const;
 
     /**
-     * function that increments the thread's lock count
+     * Function that increments the thread's lock count
      */
     void increaseLockCount();
 
@@ -92,17 +89,17 @@ public:
     void decreaseLockCount();
 
     /**
-     * function that returns the number of locks held by this thread
+     * Function that returns the number of locks held by this thread
      */
     int getLockCount();
 
     /**
-     * function that increases the thread's priority by one
+     * Function that increases the thread's priority by one
      */
     void increasePriority();
 
     /**
-     * function that decreases the thread's priority by one
+     * Function that decreases the thread's priority by one
      */
     void decreasePriority();
 
