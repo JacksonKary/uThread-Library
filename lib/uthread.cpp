@@ -58,7 +58,7 @@ static void _uthread_increase_priority(TCB *tcb);
 static void _uthread_decrease_priority(TCB *tcb);
 
 /**
- * function responsible for printing each kind of error
+ * Function responsible for printing each kind of error
  */
 void printError(int type, string pre)
 {
@@ -118,7 +118,7 @@ int getNextId()
 }
 
 /**
- * add thread to the requested ready queue
+ * Add thread to the requested ready queue
  */
 void addToReady(TCB *th)
 {
@@ -154,7 +154,7 @@ void readyStat(){
 }
 
 /**
- * set time and check if set is done correctly
+ * Set time and check if set is done correctly
  */
 static void setTime()
 {
@@ -166,7 +166,7 @@ static void setTime()
 }
 
 /*
- * returns and remove from Ready the first thread in the queue of the given priority.
+ * Returns and remove from Ready the first thread in the queue of the given priority.
  */
 TCB *getReady(int pr)
 {
@@ -176,8 +176,8 @@ TCB *getReady(int pr)
 }
 
 /*
- * returns the thread with the highest priority from Ready and removes it from there.
- * returns NULL in case there are no threads in Ready.
+ * Returns the thread with the highest priority from Ready and removes it from there.
+ * Returns NULL in case there are no threads in Ready.
  */
 TCB *popReady()
 {
@@ -210,7 +210,7 @@ int translatePriority(int tid)
 }
 
 /*
- * removes the thread with the given tid from ready.
+ * Removes the thread with the given tid from ready.
  */
 int removeFromReady(int tid)
 {
@@ -230,7 +230,7 @@ int removeFromReady(int tid)
 }
 
 /*
- * removes the thread with the given tid from blocked.
+ * Removes the thread with the given tid from blocked.
  */
 void removeFromBlock(int tid)
 {
@@ -384,7 +384,7 @@ int uthread_init(int quantum_usecs)
         return FAIL;
     }
 
-    // initialize sigaction
+    // Initialize sigaction
     _sigAction.sa_handler = timeHandler;
     if (sigemptyset(&_sigAction.sa_mask) == FAIL)
     {
@@ -403,13 +403,13 @@ int uthread_init(int quantum_usecs)
         exit(1);
     }
 
-    // initialize timer
+    // Iinitialize timer
     _timer.it_value.tv_sec = (int)(quantum_usecs / MICRO_TO_SECOND);
     _timer.it_value.tv_usec = quantum_usecs % MICRO_TO_SECOND;
     _timer.it_interval.tv_sec = (int)(quantum_usecs / MICRO_TO_SECOND);
     _timer.it_interval.tv_usec = quantum_usecs % MICRO_TO_SECOND;
 
-    // initialize main
+    // Initialize main
     TCB *mainTh = new TCB(0, ORANGE, NULL, NULL, READY);
     _threads.insert(pair<int, TCB *>(0, mainTh));
     running = mainTh;
@@ -424,7 +424,7 @@ int uthread_init(int quantum_usecs)
 // int uthread_create(void *(*start_routine)(void), void *arg)
 int uthread_create(void *(*start_routine)(void *), void *arg)
 {
-    // can't add any more!!
+    // Can't add any more!!
     if (_threads.size() == 100)
     {
         printError(TOO_MANY_THREADS, THREAD_ERROR);
@@ -485,7 +485,7 @@ int uthread_join(int tid, void **retval)
 
 static void boost_priorities()
 {
-   /* TODO if you plan to work on priority inversion */
+   /* TODO if we plan to work on priority inversion */
 }
 
 int uthread_yield(void)
@@ -511,7 +511,7 @@ void uthread_exit(void *retval)
 {
     int tid = running->getId();
 
-    // terminate main
+    // Terminate main
     if (tid == MAIN_THREAD)
     {
         // Clean up the thread TCBs
@@ -584,7 +584,7 @@ int uthread_resume(int tid)
         printError(NOT_FOUND_ID, THREAD_ERROR);
         return FAIL;
     }
-    // if not in block, don't resume
+    // If not in block, don't resume
     if (find(blocked.begin(), blocked.end(), _threads[tid]) != blocked.end())
     {
         disableInterrupts();
