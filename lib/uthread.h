@@ -30,7 +30,7 @@ int uthread_create(void *(*start_routine)(void *), void *arg);
 // Return 0 on success, -1 on failure
 int uthread_join(int tid, void **retval);
 
-/* yield */
+/* Yield */
 // Return 0 on success, -1 on failure
 int uthread_yield(void);
 
