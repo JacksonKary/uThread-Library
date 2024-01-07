@@ -38,14 +38,6 @@ void Lock::unlock()
     // Implementation is adapted from OSPP textbook figure 5.15 (https://ospp.cs.washington.edu/figures/Synchronization/UniLock.cc)
     disableInterrupts();
     // If there are threads waiting on Lock, wake the first thread
-    // if (!signaled_queue.empty()) { // If any signaled threads waiting, wake first thread
-    //     // Move one TCB from waiting to ready
-    //     TCB *next = signaled_queue.front();
-    //     signaled_queue.pop();
-
-    //     next->setState(READY);
-    //     addToReady(next);
-    // }
     if (!entrance_queue.empty()) {
         // Move one TCB from waiting to ready
         TCB *next = entrance_queue.front();
@@ -66,17 +58,8 @@ void Lock::unlock()
 //       by uthread library code
 void Lock::_unlock()
 {
-    // // If there are threads waiting on Lock, wake the first thread
-    // if (!signaled_queue.empty()) { // If any signaled threads waiting, wake first thread
-    //     // Move one TCB from waiting to ready
-    //     TCB *next = signaled_queue.front();
-    //     signaled_queue.pop();
-
-    //     next->setState(READY);
-    //     addToReady(next);
-    // }
-    if (!entrance_queue.empty()) { // If waiting threads, wake first thread
-        // Move one TCB from waiting to ready
+    // Same as unlock, but without disabling interrupts
+    if (!entrance_queue.empty()) {
         TCB *next = entrance_queue.front();
         entrance_queue.pop();
 
