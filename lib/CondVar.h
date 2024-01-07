@@ -24,7 +24,7 @@ public:
 
 private:
     Lock *lock;              // Pointer to lock being used with condition variable
-    std::queue<TCB *> queue; // queue of threads waiting for a signal
+    std::queue<TCB *> queue; // Queue of threads waiting for a signal
 };
 
 #endif // COND_VAR_H
