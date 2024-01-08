@@ -15,14 +15,14 @@ void CondVar::wait(Lock &lock)
     disableInterrupts();
 
     this->lock = &lock; 
-    queue.push(running); //add to waiting list
+    queue.push(running); // Add to waiting list
 
-    lock._unlock(); //release the lock
+    lock._unlock(); // Release the lock
     enableInterrupts();
 
-    uthread_suspend(uthread_self()); // suspend and switch
+    uthread_suspend(uthread_self()); // Suspend and switch
     
-    lock.lock(); //back from waiting
+    lock.lock(); // Back from waiting
 
 }
 
@@ -30,13 +30,13 @@ void CondVar::wait(Lock &lock)
 void CondVar::signal()
 {
     if (!queue.empty()) {
-        // get TCB from waiting list
+        // Get TCB from waiting list
         TCB* chosenTCB = queue.front();
         queue.pop();
 
-        // notify lock which thread to run
+        // Notify lock which thread to run
         lock->_signal(chosenTCB);
-        // resume lock
+        // Resume lock
         uthread_resume(chosenTCB->getId());
     }
 }
