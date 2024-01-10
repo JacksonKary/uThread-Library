@@ -97,23 +97,35 @@ in uthread.cpp. Additionally, since we're following the Priority Boosting method
     
 ## Running Tests
 The provided make file makes compiling and running tests very simple.
-Simply open a terminal in the directory containing the Makefile and input one of the following commands:
+They are also good examples of how to use the uThread library functions.
 
-- <code>make</code> : Compiles all test files
+To run tests, simply open a terminal in the directory containing the Makefile and input the following commands.
+
+To compile all test files at once:
+
+	make
 
 Alternatively, you can compile a specific test file alone with its name:
-- <code>make <test_name></code>
-- (Example) <code>make aio_test</code>
-  - Test names:
-      - aio_test
-      - aio_work
-      - test
-      - uthread_sync_demo
+
+	make aio_test
+	make aio_work
+	make test
+	make uthread_sync_demo
 
 Now, you can run any of the tests:
-- Sync vs Async I/O test: <code>./aio <num_read> <num_write></code>
-- Sync vs Async (workload): <code>./aio <num_read> <num_write></code>  (Change the global variable <code>workload</code> and remake between tests)
-- Lock vs SpinLock: <code>./test \<thread number> \<critical section></code>
-- Lock, SpinLock, Condition Variables: ./uthread-sync-demo <num_producer> <num_consumer>
+- Sync vs Async I/O test:
 
-The test files are good examples of how to use the uthread library functions.
+		./aio <num_read> <num_write>
+ 
+- Sync vs Async (workload):
+(Change the global variable <code>workload</code> and remake between tests)
+
+		./aio <num_read> <num_write>  
+  
+- Lock vs SpinLock:
+  
+		./test \<thread number> \<critical section>
+  
+- Lock, SpinLock, Condition Variables:
+
+		./uthread-sync-demo <num_producer> <num_consumer>
