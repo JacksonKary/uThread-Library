@@ -12,7 +12,7 @@ MAIN_OBJ_WL = ./tests/aio_test_workload.o
 %.o: %.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-all: uthread-sync-demo
+all: uthread-sync-demo test aio_test aio_work
 
 uthread-sync-demo: $(OBJ) $(MAIN_OBJ_UTHRAD_SYNC)
 	$(CC) -o $@ $^ $(CFLAGS)
