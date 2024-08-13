@@ -1,6 +1,6 @@
 # uThread Library (C++)
 
-### This is a library for user-level threads, with synchronization. Mimics pthread library
+### This is a library for user-level threads with synchronization. It mimics the POSIX thread (pthread) library.
 
 ## Description
 ### Synchronization
