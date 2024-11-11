@@ -2,6 +2,8 @@
 
 ### This is a library for user-level threads with synchronization. It mimics the POSIX thread (pthread) library.
 
+![image](https://github.com/user-attachments/assets/9d603516-d1b5-489b-aab4-df9978d8c624)
+
 ## Description
 ### Synchronization
 uThread mimics the interface of pthread library and runs in user space. This library assumes a uniprocessor. It uses synchronization by the means of:
